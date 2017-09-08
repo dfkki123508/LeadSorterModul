@@ -12,3 +12,13 @@ Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap i
 ## TODO
 - wrap it for python
 - create directory tree structure
+
+## INSTALL
+Set in the CMakeLists.txt to your GNSDK home
+
+### Terminal
+```
+cmake .
+make
+```
+or in CLion
