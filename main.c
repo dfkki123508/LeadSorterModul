@@ -381,39 +381,6 @@ _display_embedded_db_info(void)
 // }  /* _display_gnsdk_product_info() */
 
 
-/******************************************************************
- *
- *    _ENABLE_LOGGING
- *
- *  Enable logging for the SDK. Not used by Sample App. This helps
- *  Gracenote debug your app, if necessary.
- *
- ******************************************************************/
-static int
-_enable_logging(void)
-{
-	gnsdk_error_t error = GNSDK_SUCCESS;
-	int           rc    = 0;
-
-	error = gnsdk_manager_logging_enable(
-		"sample.log",                                           /* Log file path */
-		GNSDK_LOG_PKG_ALL,                                      /* Include entries for all packages and subsystems */
-		GNSDK_LOG_LEVEL_ERROR,                                  /* Include only error entries */
-		GNSDK_LOG_OPTION_ALL,                                   /* All logging options: timestamps, thread IDs, etc */
-		0,                                                      /* Max size of log: 0 means a new log file will be created each run */
-		GNSDK_FALSE                                             /* GNSDK_TRUE = old logs will be renamed and saved */
-		);
-	if (GNSDK_SUCCESS != error)
-	{
-		_display_last_error(__LINE__);
-		rc = -1;
-	}
-
-	return rc;
-
-}  /* _enable_logging() */
-
-
 /*****************************************************************************
  *
  *    _SET_LOCALE
@@ -516,12 +483,6 @@ _init_gnsdk(
 	{
 		_display_last_error(__LINE__);
 		return -1;
-	}
-
-	/* Enable logging */
-	if (0 == rc)
-	{
-		rc = _enable_logging();
 	}
 
 	/* Initialize the Storage SQLite Library */
