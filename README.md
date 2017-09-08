@@ -1,4 +1,4 @@
-#LeadSorterModul
+# LeadSorterModul
 
 ## Purpose
 Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap it for python usage or else.
