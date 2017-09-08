@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(LeadSorterModul)
 
 # substitute with your GNSDK home directory
-set(GNSDK_DIR "/media/intruso/HDDLinux/Programming/APIs/gracenote/gnsdk")
+set(GNSDK_DIR "/home/dudeson/Documents/gnsdk")
 message(STATUS "GNSDK directory at " ${GNSDK_DIR})
 set(MYTARGET ${CMAKE_PROJECT_NAME})
 message(STATUS "CMaking project " ${CMAKE_PROJECT_NAME} " to target " ${MYTARGET})
