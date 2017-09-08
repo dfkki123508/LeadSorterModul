@@ -8,5 +8,5 @@ Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap i
         3.1 Perform multiple requests?
 
 ### TODO
-- make function
 - wrap it for python
+- create directory tree structure
