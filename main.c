@@ -53,7 +53,6 @@ _init_gnsdk(
 	const char*          client_id_tag,
 	const char*          client_app_version,
 	const char*          license_path,
-	int                  use_local,
 	const char*					 file_path,
 	gnsdk_user_handle_t* p_user_handle
 	);
@@ -110,49 +109,34 @@ main(int argc, char* argv[])
 	const char*         client_app_version = "1.0.0.0"; /* Version of your application */
 	const char*         license_path       = NULL;
 	const char*	        file_path          = NULL;
-	int                 use_local          = -1;
 	int                 rc                 = 0;
 
-	if (argc == 6)
+	if (argc == 5)
 	{
 		client_id     = argv[1];
 		client_id_tag = argv[2];
 		license_path  = argv[3];
-		file_path     = argv[5];
-		if (!strcmp(argv[4], "online"))
-		{
-			use_local = 0;
-		}
-		else if (!strcmp(argv[4], "local"))
-		{
-			use_local = 1;
-		}
+		file_path     = argv[4];
 
-		/* GNSDK initialization */
-		if (use_local != -1)
-		{
-			rc = _init_gnsdk(
-				client_id,
-				client_id_tag,
-				client_app_version,
-				license_path,
-				use_local,
-				file_path,
-				&user_handle
-				);
-			if (0 == rc)
-			{
-				/* Perform a sample audio stream query */
-				_do_sample_musicid_stream(user_handle, file_path);
+    	rc = _init_gnsdk(
+			client_id,
+			client_id_tag,
+			client_app_version,
+			license_path,
+			file_path,
+			&user_handle
+			);
+        if (0 == rc) {
+               /* Perform a sample audio stream query */
+               _do_sample_musicid_stream(user_handle, file_path);
 
-				/* Clean up and shutdown */
-				_shutdown_gnsdk(user_handle);
-			}
-		}
+               /* Clean up and shutdown */
+               _shutdown_gnsdk(user_handle);
+        }
 	}
-	if (argc != 6 || use_local == -1)
+	if (argc != 5)
 	{
-		printf("\nUsage:\n%s clientid clientidtag license [local|online] file\n", argv[0]);
+		printf("\nUsage:\n%s clientid clientidtag license file\n", argv[0]);
 		rc = -1;
 	}
 
@@ -209,7 +193,6 @@ _get_user_handle(
 	const char*          client_id,
 	const char*          client_id_tag,
 	const char*          client_app_version,
-	int                  use_local,
 	gnsdk_user_handle_t* p_user_handle
 	)
 {
@@ -228,19 +211,13 @@ _get_user_handle(
 	 * Or they can be create 'Local Only' which means they are created locally by the
 	 * SDK but then can only be used locally by the SDK.
 	 */
-	
+
 	/* If the application cannot go online at time of user-regstration it should
 	 * create a 'local only' user. If connectivity is available, an Online user should
 	 * be created. An Online user can do both Local and Online queries.
 	 */
-	if (use_local)
-	{
-		user_reg_mode = GNSDK_USER_REGISTER_MODE_LOCALONLY;
-	}
-	else
-	{
-		user_reg_mode = GNSDK_USER_REGISTER_MODE_ONLINE;
-	}
+
+    user_reg_mode = GNSDK_USER_REGISTER_MODE_ONLINE;
 
 	/* Do we have a user saved locally? */
 	file = fopen("user.txt", "r");
@@ -359,26 +336,7 @@ _display_embedded_db_info(void)
 		_display_last_error(__LINE__);
 	}
 	
-}  /* _display_embedded_db_info() */
-
-/******************************************************************
- *
- *    _DISPLAY_GNSDK_PRODUCT_INFO
- *
- *    Display product version information
- *
- ******************************************************************/
-// static void
-// _display_gnsdk_product_info(void)
-// {
-// 	/* Display GNSDK Version infomation */
-// 	printf(
-// 		"\nGNSDK Product Version    : %s \t(built %s)\n",
-// 		gnsdk_manager_get_product_version(),
-// 		gnsdk_manager_get_build_date()
-// 	);
-
-// }  /* _display_gnsdk_product_info() */
+}
 
 
 /*****************************************************************************
@@ -459,7 +417,6 @@ _init_gnsdk(
 	const char*          client_id_tag,
 	const char*          client_app_version,
 	const char*          license_path,
-	int                  use_local,
 	const char*					 file_path,
 	gnsdk_user_handle_t* p_user_handle
 	)
@@ -495,60 +452,6 @@ _init_gnsdk(
 			rc = -1;
 		}
 	}
-	
-	if (use_local)
-	{
-		/* Set folder location of local database */
-		if (0 == rc)
-		{
-			error = gnsdk_storage_sqlite_option_set(
-				GNSDK_STORAGE_SQLITE_OPTION_STORAGE_FOLDER,
-				s_gdb_location
-			);
-			if (GNSDK_SUCCESS != error)
-			{
-				_display_last_error(__LINE__);
-				rc = -1;
-			}
-		}
-		
-		/* Initialize the Lookup Local Library */
-		if (0 == rc)
-		{
-			error = gnsdk_lookup_local_initialize(sdkmgr_handle);
-			if (GNSDK_SUCCESS != error)
-			{
-				_display_last_error(__LINE__);
-				rc = -1;
-			}
-			else
-			{
-				/* Display information about our local EDB */
-				_display_embedded_db_info();
-			}
-		}
-
-		/* Initialize the Lookup LocalStream Library */
-		if (0 == rc)
-		{
-			error = gnsdk_lookup_localstream_initialize(sdkmgr_handle);
-			if (GNSDK_SUCCESS != error)
-			{
-				_display_last_error(__LINE__);
-				rc = -1;
-			}
-		}
-		
-		if (0 == rc)
-		{
-			error = gnsdk_lookup_localstream_storage_location_set(s_gdb_location);
-			if (GNSDK_SUCCESS != error)
-			{
-				_display_last_error(__LINE__);
-				rc = -1;
-			}
-		}
-	}
 
 	/* Initialize the DSP Library - used for generating fingerprints */
 	if (0 == rc)
@@ -579,31 +482,11 @@ _init_gnsdk(
 			client_id,
 			client_id_tag,
 			client_app_version,
-			use_local,
 			&user_handle
 			);
 	}
-	
-	/* Set the user option to use our local Gracenote DB unless overridden. */
-	if (use_local)
-	{
-		if (0 == rc)
-		{
-			error = gnsdk_manager_user_option_set(
-				user_handle,
-				GNSDK_USER_OPTION_LOOKUP_MODE,
-				GNSDK_LOOKUP_MODE_LOCAL
-			);
-			if (GNSDK_SUCCESS != error)
-			{
-				_display_last_error(__LINE__);
-				rc = -1;
-			}
-		}
-	}
 
-	/* Set the 'locale' to return locale-specifc results values. This examples loads an English locale. */
-	if (0 == rc)
+    if (0 == rc)
 	{
 		rc = _set_locale(user_handle);
 	}
