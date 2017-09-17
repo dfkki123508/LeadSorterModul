@@ -23,22 +23,23 @@ file_path = '/media/intruso/HDDLinux/Programming/APIs/gracenote/gnsdk/sample_dat
 
 def get_track_info():
     p = Popen([executable, client_id, client_id_tag, license_path, file_path], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    output, err = p.communicate(b"bla")
-    track_info = json.loads(output)
-    rc = p.returncode
+    output, err = p.communicate()
 
-    #convert to json and cut useless information
-    print "Artist:\t", track_info[0]['artist']
-    print "Title:\t", track_info[0]['track']
-    print "Album:\t", track_info[0]['album']
-    # print track_info[0]
+    track_info = json.loads(output)
+    # print "Artist:\t", track_info[0]['artist']
+    # print "Title:\t", track_info[0]['track']
+    # print "Album:\t", track_info[0]['album']
+    print track_info[0]
 
     return track_info
 
 def is_track_sorted():
-    return false
+    return False
 
 def sort_track():
     pass
 
-get_track_info()
+track_info = get_track_info()
+
+if not is_track_sorted():
+    sort_track()
