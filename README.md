@@ -11,4 +11,8 @@ Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap i
 
 ## TODO
 - wrap it for python
-- create directory tree structure
+- implement conversion to .wav (e.g. ffmpeg)
+- implement delete .wav files
+- implement is tagged
+- implement retag (e.g. eyeD3)
+- implement directory structure
