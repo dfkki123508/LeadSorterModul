@@ -2,7 +2,7 @@ import argparse
 import sys
 import os
 import taglib
-from shutil import copyfile, move
+from shutil import copyfile
 
 # region CL Arguments
 parser = argparse.ArgumentParser(
