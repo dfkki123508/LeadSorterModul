@@ -21,7 +21,7 @@ link_directories("${GNSDK_DIR}/lib/linux_x86-64")
 #endforeach()
 
 # add source files
-set(SOURCE_FILES main.c)
+set(SOURCE_FILES test.c)
 add_executable(${MYTARGET} ${SOURCE_FILES})
 
 # add link libraries
