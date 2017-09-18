@@ -1,7 +1,8 @@
 # LeadSorterModul
 
 ## Purpose
-Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap it for python usage or else.
+Build C-program, which converts music file to .wav, looks up a wav-file via ***GNSDK***.
+Wrap this for PYTHON (re)tag original files and create hierarchily directory structure.
 
 ## Pipeline
     1. convert input to wav (if necessary) - ffmpeg
