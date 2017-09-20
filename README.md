@@ -1,7 +1,8 @@
 # LeadSorterModul
 
 ## Purpose
-Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap it for python usage or else.
+Build C-program, which converts music file to .wav, looks up a wav-file via ***GNSDK***.
+Wrap this for PYTHON (re)tag original files and create hierarchily directory structure.
 
 ## Pipeline
     1. convert input to wav (if necessary) - ffmpeg
@@ -10,13 +11,18 @@ Build a simple C function, which looks up a wav-file via ***GNSDK***, and wrap i
         3.1 Perform multiple requests?
 
 ## TODO
-- wrap it for python
-- create directory tree structure
+- update README.md
+- wrap it for python (done)
+- create directory tree structure 
+- implement delete .wav files
+- implement is tagged
+- implement retag (e.g. eyeD3)
+- implement directory structure
 
-## INSTALL
+## INSTALL (to be updated)
 Set in the CMakeLists.txt to your GNSDK home
 
-### Terminal
+### Terminal (to be updated)
 ```
 cmake .
 make
