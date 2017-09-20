@@ -1,14 +1,31 @@
+/**
+ * Wrapper of the C gnsdk lookup module for python
+ *
+ * Before using u have to set the library path (where the gnsdk and ffmpeg libs lay)
+ * in your IDE or cmd, e.g.:
+ *
+ * 		$ export LD_LIBRARY_PATH=/usr/local/lib:/path/to/gnsdk/lib/linux_x86-64:$LD_LIBRARY_PATH
+ *
+ * python:
+ * 		>>> import CGnsdkLookup
+ * 		>>> res = CGnsdkLookup.lookup_audio(client_id,			\
+ * 								  		client_id_tag,   		\
+ * 								  		"/path/to/licence", 	\
+ * 								  		"/path/to/audio.mp3") 	\
+ * 		>>> res
+ * 		>>> '{"artist": "Queen", "album": "A Night At The Opera", "track": "Bohemian Rhapsody"}'
+ *
+ * The result string can be converted to a dict via:
+ *
+ * 		>>> import ast
+ * 		>>> ast.literal_eval(res)
+ */
+
+
 #include <stdio.h>
 #include <Python.h>
 #include <numpy/arrayobject.h>
 #include "LookupAudio.h"
-
-/**
- * example python: CGnsdkLookup.lookup_audio("1312006557","9CE95C3EBC19CBA3C1F0C604EDA46464","/home/dudeson/Documents/gnsdk/LICENSE","/home/dudeson/Music/TEST/Queen - Bohemian Rhapsody (Official Video).mp3")
- * @param self
- * @param args
- * @return
- */
 
 static PyObject * lookup_audio_wrapper(PyObject * self, PyObject * args)
 {

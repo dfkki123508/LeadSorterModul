@@ -1,3 +1,9 @@
+/**
+ * Main functionality, uses GNSDK and FFmpeg
+ *
+ */
+
+
 #define GNSDK_MUSICID          		1
 #define GNSDK_MUSICID_STREAM       	1
 #define GNSDK_DSP                   1

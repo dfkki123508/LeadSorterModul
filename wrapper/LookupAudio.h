@@ -1,9 +1,11 @@
-//
-// Created by dudeson on 19.09.17.
-//
+/**
+ * Header File for the LookupAudio.c
+ * Only need to declare @function lookup_audio here,
+ * since it's the only one called from the module.
+ */
 
-#ifndef TEST_LOOKUPAUDIO_H
-#define TEST_LOOKUPAUDIO_H
+#ifndef LOOKUP_AUDIO_H
+#define LOOKUP_AUDIO_H
 
 int lookup_audio(const char* client_id,
 				 const char* client_id_tag,
@@ -11,4 +13,4 @@ int lookup_audio(const char* client_id,
 				 const char* file_path,
 				 const char* result_str);
 
-#endif //TEST_LOOKUPAUDIO_H
+#endif /* LOOKUP_AUDIO_H */

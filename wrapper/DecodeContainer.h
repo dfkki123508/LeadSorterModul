@@ -1,3 +1,8 @@
+/**
+ * A container to gather the ffmpeg-structures used to decode an mp3 file
+ *
+ */
+
 
 #ifndef DECODE_CONTAINER_H
 #define DECODE_CONTAINER_H

@@ -1,8 +1,17 @@
+"""
+At first set the gnsdk_dir!!
+
+To install use:
+    python3 setup.py install --record files.txt
+
+To remove use:
+    rm -rf build
+    cat files.txt | xargs rm -f
+"""
+
 from distutils.core import setup, Extension
 from distutils.command.build_ext import build_ext
-# import numpy as np
 import glob
-import os
 import sysconfig
 import pkgconfig
 
@@ -37,7 +46,6 @@ linker_flags.append(pkgconfig.libs('libavformat'))
 linker_flags.append(pkgconfig.libs('libavutil'))
 linker_flags.append(pkgconfig.libs('libswresample'))
 linker_flags.append(pkgconfig.libs('libswscale'))
-# linker_flags.append(" -Wl,--whole-archive ")
 
 extra_compile_args += sysconfig.get_config_var('CFLAGS').split()
 extra_compile_args += ['-fPIC', '-DPIC','-DNDEBUG', '-O3']
