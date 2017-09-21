@@ -8,40 +8,52 @@ def findFiles(search_path):
             os.path.isfile(os.path.join(search_path, f))]  # get all files inside search_path
     return files
 
-def sortFiles(files, move, dest_path, search_path):
+
+def retagFile(track_info, file, search_path):
+        song = taglib.File(search_path + file)
+
+        if 'track' in track_info:
+             song.tags['TITLE'] = track_info['track']
+        if 'artist' in track_info:
+             song.tags['ARTIST'] = track_info['artist']
+        if 'album' in track_info:
+            song.tags['ALBUM'] = track_info['album']
+        song.save()
+
+def sortFile(file, move, dest_path, search_path):
     if not os.path.exists(dest_path + 'Unknown'):
         os.makedirs(dest_path + 'Unknown')  # directory for unsortable files
 
-    for file in files:
-        song = taglib.File(search_path + file)
+    ext = file.split(".")
+    ext = "." + ext[len(ext)-1]
+    song = taglib.File(search_path + file)
 
-        new_path = ''
-
-        if 'ARTIST' in song.tags:
-            # TO-DO: filter featurings
-            # if song.tags['ARTIST'][0].rfind('feat'):
-            #   new_path = song.tags['ARTIST'][0][:song.tags['ARTIST'][0].rfind('feat')]
-            # else:
-            new_path = song.tags['ARTIST'][0]
-
-            if not os.path.exists(dest_path + new_path):
-                os.makedirs(dest_path + new_path)
-
-            if 'ALBUM' in song.tags:
-                new_path = new_path + '/' + song.tags['ALBUM'][0]
-                if not os.path.exists(dest_path + new_path):
-                    os.makedirs(dest_path + new_path)
-
-            if 'TITLE' in song.tags:
-                if os.path.exists(dest_path + new_path + '/' + file):
-                    break
-
-            if not move:
-                copyfile(search_path + file, dest_path + new_path + '/' + file)
-            else:
-                os.rename(search_path + file, dest_path + new_path + '/' + file)
-        else:
-            if not move:
-                copyfile(search_path + file, dest_path + 'Unknown/' + file)
-            else:
-                os.rename(search_path + file, dest_path + 'Unknown/' + file)
+    #sort
+    # new_path = ''
+    # if 'ARTIST' in song.tags:
+    #     # TO-DO: filter featurings
+    #     # if song.tags['ARTIST'][0].rfind('feat'):
+    #     #   new_path = song.tags['ARTIST'][0][:song.tags['ARTIST'][0].rfind('feat')]
+    #     # else:
+    #     new_path = song.tags['ARTIST']
+    #
+    #     if not os.path.exists(dest_path + new_path):
+    #         os.makedirs(dest_path + new_path)
+    #
+    #     if 'ALBUM' in song.tags:
+    #         new_path = new_path + '/' + song.tags['ALBUM'][0]
+    #         if not os.path.exists(dest_path + new_path):
+    #             os.makedirs(dest_path + new_path)
+    #
+    #     if 'TITLE' in song.tags and os.path.exists(dest_path + new_path + '/' + song.tags['TRACK'] + ext):
+    #         print(song.tags['ARTIST'][0] + "\talready exists...")
+    #     else:
+    #         if not move:
+    #             copyfile(search_path + file, dest_path + new_path + '/' + song.tags['TRACK'] + ext)
+    #         else:
+    #             os.rename(search_path + file, dest_path + new_path + '/' + song.tags['TRACK'] + ext)
+    # else:
+    #     if not move:
+    #         copyfile(search_path + file, dest_path + 'Unknown/' + file)
+    #     else:
+    #         os.rename(search_path + file, dest_path + 'Unknown/' + file)
