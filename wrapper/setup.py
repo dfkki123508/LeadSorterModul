@@ -47,6 +47,11 @@ linker_flags.append(pkgconfig.libs('libavutil'))
 linker_flags.append(pkgconfig.libs('libswresample'))
 linker_flags.append(pkgconfig.libs('libswscale'))
 
+# add runtime link directories
+for dir in lib_dirs:
+    linker_flags.append('-Wl,-rpath,'+dir)
+
+
 extra_compile_args += sysconfig.get_config_var('CFLAGS').split()
 extra_compile_args += ['-fPIC', '-DPIC','-DNDEBUG', '-O3']
 
