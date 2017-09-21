@@ -1,8 +1,3 @@
-/**
- * A container to gather the ffmpeg-structures used to decode an mp3 file
- *
- */
-
 
 #ifndef DECODE_CONTAINER_H
 #define DECODE_CONTAINER_H
@@ -35,8 +30,8 @@ typedef struct {
 
 } DecodeContainer;
 
-void decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
-			uint8_t* outdata, int* read_size);
+int decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
+		   uint8_t* outdata, int* read_size);
 
 int open_codec_context(int *stream_idx,
 					   AVCodecContext **dec_ctx,
