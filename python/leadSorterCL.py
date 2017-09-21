@@ -53,5 +53,5 @@ for file in files:
         retagFile(track_info, file, search_path)
     except Exception as e:
         #retagRenameFile(search_path, file, track_info)
-        print("Error: LookUp, ParseInfo, RetagRename")
+        print("\n")
     sortFile(file, move, dest_path, search_path)
