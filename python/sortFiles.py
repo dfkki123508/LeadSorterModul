@@ -32,9 +32,7 @@ def sortFile(file, move, dest_path, search_path):
     new_path = ''
     if 'ARTIST' in song.tags:
         # TO-DO: filter featurings
-        # if song.tags['ARTIST'][0].rfind('feat'):
-        #   new_path = song.tags['ARTIST'][0][:song.tags['ARTIST'][0].rfind('feat')]
-        # else:
+
         new_path = song.tags['ARTIST'][0]
 
         if not os.path.exists(dest_path + new_path):
@@ -49,9 +47,9 @@ def sortFile(file, move, dest_path, search_path):
             print(song.tags['ARTIST'][0] + "\talready exists...")
         else:
             if not move:
-                copyfile(search_path + file, dest_path + new_path + '/' + song.tags['TITLE'][0] + ext)
+                copyfile(search_path + file, dest_path + new_path + '/' + song.tags['TITLE'][0].replace("/", "|") + ext)
             else:
-                os.rename(search_path + file, dest_path + new_path + '/' + song.tags['TITLE'][0] + ext)
+                os.rename(search_path + file, dest_path + new_path + '/' + song.tags['TITLE'][0].replace("/", "|") + ext)
     else:
         if not move:
             copyfile(search_path + file, dest_path + 'Unknown/' + file)
