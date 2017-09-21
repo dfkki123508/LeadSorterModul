@@ -2,10 +2,20 @@ import sys
 import os
 import taglib
 from shutil import copyfile
+def isMusicFile(search_path,f):
+    formats = ('MP3','mp3','ogg','wma', 'WMA', 'wav','WAV')
+    return f.endswith(formats)
 
 def findFiles(search_path):
-    files = [f for f in os.listdir(search_path) if
-            os.path.isfile(os.path.join(search_path, f))]  # get all files inside search_path
+    #   TODO add subdir path
+    # allfiles = []
+    # for path, subdirs, files in os.walk(search_path):
+    #     for name in files:
+    #         allfiles.append(os.path.join(path, name))
+    # print (allfiles)
+
+    files = [f for f in os.listdir(search_path) if os.path.isfile(os.path.join(search_path, f))]  # get all files inside search_path
+    print(files)
     return files
 
 
@@ -44,7 +54,7 @@ def sortFile(file, move, dest_path, search_path):
                 os.makedirs(dest_path + new_path)
 
         if 'TITLE' in song.tags and os.path.exists(dest_path + new_path + '/' + song.tags['TITLE'][0] + ext):
-            print(song.tags['ARTIST'][0] + "\talready exists...")
+            print(song.tags['TITLE'][0] + "\talready exists...")
         else:
             if not move:
                 copyfile(search_path + file, dest_path + new_path + '/' + song.tags['TITLE'][0].replace("/", "|") + ext)

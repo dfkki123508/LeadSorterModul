@@ -5,6 +5,8 @@ import CGnsdkLookup
 from sortFiles import *
 import ast
 
+
+
 client_id = '787507086'
 client_id_tag = '29C4E1774124666EE2C096CBA3B78E6B'
 license_path = '/media/intruso/HDDLinux/Programming/APIs/gracenote/gnsdk/lic.txt'
@@ -53,5 +55,8 @@ for file in files:
         retagFile(track_info, file, search_path)
     except Exception as e:
         #retagRenameFile(search_path, file, track_info)
-        print("\n")
-    sortFile(file, move, dest_path, search_path)
+        print(e)
+    try:
+        sortFile(file, move, dest_path, search_path)
+    except Exception as e:
+        print("not suitable for taglib")
