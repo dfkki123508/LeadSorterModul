@@ -486,13 +486,15 @@ process_audio(
 		gnsdk_cstr_t s_audio_file
 )
 {
-	gnsdk_error_t error           = GNSDK_SUCCESS;
-	gnsdk_bool_t  complete		  = GNSDK_FALSE;
-//	gnsdk_byte_t  pcm_audio[2048] = {0};
-	FILE*         p_file          = NULL;
-	int			  read_size       = 0;
-	int           rc              = 0;
+	gnsdk_error_t 	error           = GNSDK_SUCCESS;
+	gnsdk_bool_t  	complete		= GNSDK_FALSE;
+//	gnsdk_byte_t  	pcm_audio[2048] = {0};
+	FILE*         	p_file          = NULL;
 	DecodeContainer dec_ctn;
+	int			  	read_size		= 0;
+	int			  	skip_frames	  	= 5;
+	int           	rc              = 0;
+	int			  	i;
 
 	init_decode_container(&dec_ctn,s_audio_file);
 
@@ -511,6 +513,13 @@ process_audio(
 		return -1;
 	}
 
+	// skip first frames, since error: "header missing"
+	// raises when avcodec_send_packet is called
+	for (i = 0; i < skip_frames;i++) {
+		if (av_read_frame(dec_ctn.fmt_ctx, &(dec_ctn.pkt)) < 0) {
+			return -1;
+		}
+	}
 
 	read_size = get_next_chunk(&dec_ctn);
 //	read_size = fread(pcm_audio, sizeof(char), 2048, p_file);
@@ -541,7 +550,6 @@ process_audio(
 		}
 
 		read_size = get_next_chunk(&dec_ctn);
-//		read_size = fread(pcm_audio, sizeof(char), 2048, p_file);
 	}
 
 	release_decode_container(&dec_ctn);

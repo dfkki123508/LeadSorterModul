@@ -16,18 +16,19 @@
 #include "DecodeContainer.h"
 
 
-void decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
-			uint8_t* outdata, int* read_size)
+int decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
+		   uint8_t* outdata, int* read_size)
 {
 	int i, ch;
 	int ret, data_size;
 	size_t shft;
+	const int nr_skipping_frames = 5;
 
 	/* send the packet with the compressed data to the decoder */
 	ret = avcodec_send_packet(dec_ctx, pkt);
 	if (ret < 0) {
 		fprintf(stderr, "Error submitting the packet to the decoder (%d; %s)\n", ret, av_err2str(ret));
-		return;
+		return -1;
 	}
 
 	/* read all the output frames (in general there may be any number of them */
@@ -35,11 +36,11 @@ void decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
 		ret = avcodec_receive_frame(dec_ctx, frame);
 		if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
 //			fprintf(stderr, "Error %s\n", av_err2str(ret));
-			return;
+			return 0;
 		}
 		else if (ret < 0) {
 			fprintf(stderr, "Error during decoding\n");
-			return;
+			return -1;
 		}
 
 //		if (audio_frame_count % 100)
@@ -51,7 +52,7 @@ void decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
 		if (data_size < 0) {
 			/* This should not occur, checking just for paranoia */
 			fprintf(stderr, "Failed to calculate data size\n");
-			return;
+			return -1;
 		}
 
 //		FILE * outfile;
@@ -74,6 +75,7 @@ void decode(AVCodecContext *dec_ctx, AVPacket *pkt, AVFrame *frame,
 
 		*read_size = frame->nb_samples * dec_ctx->channels * data_size; // nr of bytes
 	}
+	return 0;
 }
 
 int open_codec_context(int *stream_idx,
@@ -184,7 +186,6 @@ void release_decode_container(DecodeContainer* ctn)
 
 int get_next_chunk(DecodeContainer* ctn)
 {
-
 	if (!(ctn->frame = av_frame_alloc())) {
 		fprintf(stderr, "Could not allocate audio frame\n");
 		return -1;
@@ -198,7 +199,8 @@ int get_next_chunk(DecodeContainer* ctn)
 //	printf("Reading packet %d at %d\t size %d\n",
 //		   ctn->pkt.stream_index, ctn->pkt.pos, ctn->pkt.size);
 
-	decode(ctn->audio_dec_ctx, &(ctn->pkt), ctn->frame, ctn->data, &ctn->data_size);
+	decode(ctn->audio_dec_ctx, &(ctn->pkt), ctn->frame,
+		   ctn->data, &ctn->data_size);
 
 	return ctn->data_size;
 }

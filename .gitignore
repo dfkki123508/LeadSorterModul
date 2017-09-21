@@ -1,5 +1,7 @@
 .idea/
 CMakeFiles/
+build/
+files.txt
 *.cmake
 CMakeCache.txt
 Makefile
@@ -9,3 +11,4 @@ makefile
 *.cbp
 user.txt
 LeadSorterModul
+testScript.py
