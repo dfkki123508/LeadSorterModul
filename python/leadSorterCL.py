@@ -7,9 +7,9 @@ import ast
 
 
 
-client_id = '787507086'
-client_id_tag = '29C4E1774124666EE2C096CBA3B78E6B'
-license_path = '/media/intruso/HDDLinux/Programming/APIs/gracenote/gnsdk/lic.txt'
+client_id = 'YOUR_ID'
+client_id_tag = 'YOUR_ID_TAG'
+license_path = 'YOUR_LICENSE_PATH'
 
 # region CL Arguments
 parser = argparse.ArgumentParser(
