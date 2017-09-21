@@ -522,7 +522,6 @@ process_audio(
 	}
 
 	read_size = get_next_chunk(&dec_ctn);
-//	read_size = fread(pcm_audio, sizeof(char), 2048, p_file);
 	while (read_size > 0)
 	{
 		if (complete == GNSDK_TRUE)
@@ -553,7 +552,6 @@ process_audio(
 	}
 
 	release_decode_container(&dec_ctn);
-//	fclose(p_file);
 
 	/*signal that we are done*/
 	if (GNSDK_SUCCESS == error)

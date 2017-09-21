@@ -1,11 +1,6 @@
 /**
  * Wrapper of the C gnsdk lookup module for python
  *
- * Before using u have to set the library path (where the gnsdk and ffmpeg libs lay)
- * in your IDE or cmd, e.g.:
- *
- * 		$ export LD_LIBRARY_PATH=/usr/local/lib:/path/to/gnsdk/lib/linux_x86-64:$LD_LIBRARY_PATH
- *
  * python:
  * 		>>> import CGnsdkLookup
  * 		>>> res = CGnsdkLookup.lookup_audio(client_id,			\
