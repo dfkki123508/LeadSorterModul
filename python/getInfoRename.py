@@ -1,7 +1,7 @@
 
 from subprocess import Popen, PIPE
 from os import listdir
-from os.path import isfile, join
+from os.path import isfile, join, splitext
 
 import json
 import taglib
@@ -24,23 +24,19 @@ def is_file_tagged():
     return False
 
 
-def get_track_info():
-    p = Popen([executable, client_id, client_id_tag, license_path, wav_path], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    output, err = p.communicate()
-
-    track_info = json.loads(output)
-    print track_info
-    return track_info
-
-
-def set_track_info():
-    if 'track' in track_info[0]:
-        song.tags['TITLE'] = track_info[0]['track']
-    if 'artist' in track_info[0]:
-        song.tags['ARTIST'] = track_info[0]['artist']
-    if 'album' in track_info[0]:
-        song.tags['ALBUM'] = track_info[0]['album']
-    song.save()
+def retagRenameFile(search_path, file, track_info):
+    _ , f_ext = splitext(file)
+    song = taglib.File(search_path + file)
+    # 
+    # if 'track' in track_info:
+    #     new_name = search_path + track_info['track'] + f_ext
+    #     os.rename(search_path + file, new_name)
+    #     song.tags['TITLE'] = track_info['track']
+    # if 'artist' in track_info:
+    #     song.tags['ARTIST'] = track_info['artist']
+    # if 'album' in track_info:
+    #     song.tags['ALBUM'] = track_info['album']
+    # song.save()
 
 
 #if not is_file_tagged(wav_path) or overtag:
