@@ -2,7 +2,7 @@
 #project(LeadSorterModul)
 #
 ## substitute with your GNSDK home directory
-#set(GNSDK_DIR "/home/dudeson/Documents/gnsdk")
+#set(GNSDK_DIR "YOUR_PATH_TO_GNSDK")
 #message(STATUS "GNSDK directory at " ${GNSDK_DIR})
 #set(MYTARGET ${CMAKE_PROJECT_NAME})
 #message(STATUS "CMaking project " ${CMAKE_PROJECT_NAME} " to target " ${MYTARGET})

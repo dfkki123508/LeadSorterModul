@@ -4,6 +4,7 @@ build/
 files.txt
 *.cmake
 CMakeCache.txt
+CMakeLists.txt
 Makefile
 makefile
 *.mk
