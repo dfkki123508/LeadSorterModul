@@ -14,3 +14,5 @@ user.txt
 LeadSorterModul
 testScript.py
 wrapper/setup.py
+.gitignore.save
+python/__pycache__/sortFiles.cpython-35.pyc
