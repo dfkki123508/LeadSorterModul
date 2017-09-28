@@ -52,7 +52,7 @@ files = findFiles(search_path)
 count = 0
 maximum = len(files)
 for file in files:
-    sys.stdout.write("Download progress: %0.2f   \r" % (count/maximum*100) )
+    sys.stdout.write("Progress: %0.2f%%    \r" % (count/maximum*100) )
     sys.stdout.flush()
     try:
         res = CGnsdkLookup.lookup_audio(client_id, client_id_tag,license_path,search_path+file)
