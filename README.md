@@ -5,19 +5,19 @@ Build C-program, which converts music file to .wav, looks up a wav-file via ***G
 Wrap this for PYTHON (re)tag original files and create hierarchily directory structure.
 
 ## Pipeline
-    1. convert input to wav (if necessary) - ffmpeg
+    1. convert input to wav - ffmpeg
     2. lookup-request via gnsdk
     3. return result or raise error
         3.1 Perform multiple requests?
+    4. use returned information for retagging
+    5. sort track into dir tree (Artist --> Album --> Title)
 
 ## TODO
-- update README.md
+- add INSTALL, TERMINAL, EXAMPLE to README.md
 - wrap it for python (done)
-- create directory tree structure 
-- implement delete .wav files
-- implement is tagged
-- implement retag (e.g. eyeD3)
-- implement directory structure
+- implement is tagged (done)
+- implement retag with taglib (done)
+- implement directory structure (done)
 
 ## INSTALL (to be updated)
 Set in the CMakeLists.txt to your GNSDK home
