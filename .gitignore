@@ -2,12 +2,16 @@
 CMakeFiles/
 build/
 files.txt
-*.cmake
+<<<<<<< HEAD
 CMakeCache.txt
 CMakeLists.txt
 __pycache__/
 *.gdb
 *.cbp
+*.pyc
 user.txt
 LeadSorterModul
 testScript.py
+wrapper/setup.py
+.gitignore.save
+
