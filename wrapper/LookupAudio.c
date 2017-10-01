@@ -68,8 +68,8 @@ char* lookup_audio(const char* client_id,
 
 	// Check if file is mp3 by file extension
 	if (check_file_extension(file_path,"mp3") < 1){
-		fprintf(stderr,"Not supported audio type of file %s!\n", file_path);
-		return -1;
+		fprintf(stderr,"Warning: No mp3 extension! file %s!\n", file_path);
+//		return "";
 	}
 
 	//  Initialize the GNSDK and the MusicID-File and DSP (for fingerprinting) modules

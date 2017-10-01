@@ -5,9 +5,11 @@ import CGnsdkLookup
 from sortFiles import *
 import ast
 
-client_id = '787507086'
-client_id_tag = '29C4E1774124666EE2C096CBA3B78E6B'
-license_path = '/media/intruso/HDDLinux/Programming/APIs/gracenote/gnsdk/lic.txt'
+# david "1312006557","9CE95C3EBC19CBA3C1F0C604EDA46464","/home/dudeson/Documents/gnsdk/LICENSE"
+
+client_id = '1312006557'
+client_id_tag = '9CE95C3EBC19CBA3C1F0C604EDA46464'
+license_path = '/home/dudeson/Documents/gnsdk/LICENSE'
 
 # region CL Arguments
 parser = argparse.ArgumentParser(

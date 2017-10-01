@@ -5,12 +5,9 @@ files.txt
 *.cmake
 CMakeCache.txt
 CMakeLists.txt
-Makefile
-makefile
-*.mk
+__pycache__/
 *.gdb
 *.cbp
 user.txt
 LeadSorterModul
 testScript.py
-wrapper/setup.py

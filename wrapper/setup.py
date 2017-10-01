@@ -16,7 +16,7 @@ import sysconfig
 import pkgconfig
 
 # set to your gnsdk dir
-gnsdk_dir = '/media/intruso/HDDLinux/Programming/APIs/gracenote/gnsdk'
+gnsdk_dir = '/home/dudeson/Documents/gnsdk'
 gnsdk_libs = glob.glob(gnsdk_dir + '/lib/linux_x86-64/*')
 
 extra_compile_args  = []
