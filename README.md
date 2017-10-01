@@ -27,10 +27,11 @@ Therefore we implemented a python command line interface which draws on the [Gra
 * unix pkg-config and its python [interface](https://pypi.python.org/pypi/pkgconfig) (use: `pip install pkgconfig` to install)
 
 ## Installation
-Install the wrapper:     
-1. Open file ./wrapper/setup.py and set `gnsdk_dir` variable to your path to the GNSDK home directory
-2. Type `make`
-
+1. Install the wrapper:     
+    1. Open file ./wrapper/setup.py and set `gnsdk_dir` variable to your path to the GNSDK home directory
+    2. Type `make`
+2. Set client tag, id and license path:
+    1. Open ./python/leadSorterCL.py and set the identification (can be retrieved from your gnsdk account)
 ## Execution
 ```
 python3 leadSorterCL.py [-h] [-m] [-p] [-d DESTINATION] search_path
