@@ -32,7 +32,7 @@ if args.destination:
         os.makedirs(dest_path)
 # endregion
 
-def retagRenameFile(search_path, file, track_info):
+def retagFile(search_path, file, track_info):
     ext = file.split(".")
     ext = "." + ext[len(ext)-1]
     song = taglib.File(search_path + file)
