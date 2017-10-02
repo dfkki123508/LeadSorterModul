@@ -32,19 +32,6 @@ if args.destination:
         os.makedirs(dest_path)
 # endregion
 
-def retagFile(search_path, file, track_info):
-    ext = file.split(".")
-    ext = "." + ext[len(ext)-1]
-    song = taglib.File(search_path + file)
-
-    if 'track' in track_info:
-         song.tags['TITLE'] = track_info['track']
-    if 'artist' in track_info:
-         song.tags['ARTIST'] = track_info['artist']
-    if 'album' in track_info:
-        song.tags['ALBUM'] = track_info['album']
-    song.save()
-
 files = findFiles(search_path)
 
 count = 0
