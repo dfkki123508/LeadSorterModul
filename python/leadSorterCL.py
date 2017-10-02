@@ -59,7 +59,6 @@ for file in files:
             print(track_info)
         retagFile(track_info, file, search_path)
     except Exception as e:
-        #retagRenameFile(search_path, file, track_info)
         if doPrint:
             print(e)
     try:
