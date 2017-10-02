@@ -1,6 +1,6 @@
 # LeadSorterModul
 
-Imagine an unsorted music library with unknown or badly named and tagged audio-files. This program should help bring a whole library into the right directory structure and tag each file with the right song information (i.e. artist, album, track-name) set as ID3-tags. The desired directory structure looks as following:
+Imagine an unsorted music library with unknown or badly named and tagged audio-files. This program should help to bring a whole music-library into the right directory structure and tag each file with the right song information (i.e. artist, album, track-name) set as ID3-tags. The desired directory structure looks as following:
   ```
   ├── <artist>
   │   └── <album>
