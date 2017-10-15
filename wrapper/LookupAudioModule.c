@@ -19,7 +19,6 @@
 
 #include <stdio.h>
 #include <Python.h>
-#include <numpy/arrayobject.h>
 #include "LookupAudio.h"
 
 static PyObject * lookup_audio_wrapper(PyObject * self, PyObject * args)
