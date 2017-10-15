@@ -7,7 +7,7 @@
 #ifndef LOOKUP_AUDIO_H
 #define LOOKUP_AUDIO_H
 
-int lookup_audio(const char* client_id,
+char* lookup_audio(const char* client_id,
 				 const char* client_id_tag,
 				 const char* license_path,
 				 const char* file_path,
