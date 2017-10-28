@@ -1,6 +1,6 @@
 .idea/
 CMakeFiles/
-build/
+wrapper/build/
 files.txt
 CMakeCache.txt
 CMakeLists.txt
